@@ -29,7 +29,7 @@
 const int INF = 1<<28;
 const ll LINF = 1LL<<59LL;
 const ll MOD = 1000000007;
-const int MAXN = 1000000007;
+const int MAXN = 1000007;
 
 using namespace std;
 
