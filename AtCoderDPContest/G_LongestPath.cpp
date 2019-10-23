@@ -9,7 +9,7 @@ using namespace std;
 
 const int MAXN = 100005;
 int dp[MAXN];
-vi g[MAXN],par[MAXN];
+vi par[MAXN];
 bool vis[MAXN];
 
 void dfs(int node){
@@ -30,7 +30,6 @@ int main(){
 	while(m--){
 		cin >> x >> y;
 		x--; y--;
-		g[x].pb(y);
 		par[y].pb(x);
 	}
 	FOR(i,n) dp[i] = INT_MIN;
