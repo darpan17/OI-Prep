@@ -12,7 +12,6 @@ int val[105];
 int main(){
 	int n; ll w; cin >> n >> w;
 	FORE(i,1,n) cin >> wt[i] >> val[i];
-	int pre[n+5] = {0}; FORE(i,1,n) pre[i] = pre[i-1]+val[i];
 	FORE(i,1,100005) dp[0][i] = 123456789123456789;
 	FORE(i,1,n+1){
 		FOR(j,100005){
