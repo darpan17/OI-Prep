@@ -42,18 +42,18 @@ bool union_(int a,int b){
     return true;
 }
 
-inline double dist(int i,int j){
-    double res = sqrt((a[i].first-a[j].first)*(a[i].first-a[j].first)+(a[i].second-a[j].second)*(a[i].second-a[j].second));
+// calculating squared distance from beginning to avoid precision issues
+inline ll dist(int i,int j){
+    ll res = (a[i].first-a[j].first)*(a[i].first-a[j].first)+(a[i].second-a[j].second)*(a[i].second-a[j].second);
     return res;
 }
-
 
 int main(){
     freopen("moocast.in","r",stdin);
     freopen("moocast.out","w",stdout);
     int n; sf("%d",&n);
     for(int i = 0; i < n; i++) sf("%d%d",&a[i].first,&a[i].second);
-    vector<pair<double,pair<int,int>>> edges;
+    vector<pair<ll,pair<int,int>>> edges;
     for(int i = 0; i < n; i++){
         for(int j = i+1; j < n; j++){
             edges.pb(mp(dist(i,j),mp(i,j)));
@@ -64,11 +64,10 @@ int main(){
         ranks[i] = 1;
     }
     sort(edges.begin(),edges.end());
-    //for(auto i:edges) cout << i.first << "\t" <<i.second.first<<" "<<i.second.second<<endl;
-    double ans = 0;
+    ll ans = 0;
     for(auto i:edges){
         if(union_(i.second.first,i.second.second)) ans = max(i.first,ans);
     }
-    pf("%lld",(ll)floor(ans*ans));
+    pf("%lld",ans);
     return 0;
 }
