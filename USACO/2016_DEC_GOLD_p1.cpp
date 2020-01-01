@@ -46,11 +46,6 @@ inline double dist(int i,int j){
     double res = sqrt((a[i].first-a[j].first)*(a[i].first-a[j].first)+(a[i].second-a[j].second)*(a[i].second-a[j].second));
     return res;
 }
-/*
-inline ll dist(int i,int j){
-    ll res = abs((a[i].first-a[j].first))+abs((a[i].second-a[j].second));//+(a[i].second-a[j].second)*(a[i].second-a[j].second));
-    return res;
-}*/
 
 
 int main(){
