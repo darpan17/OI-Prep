@@ -1,3 +1,4 @@
+// Soln: Use DSU to find MST in graph. The longest edge of resulting MST is the answer.
 #include <bits/stdc++.h>
 #define sf scanf
 #define pf printf
