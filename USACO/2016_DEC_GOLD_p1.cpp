@@ -6,8 +6,8 @@
 #define vi vector<int>
 #define pii pair<int,int>
 #define vpii vector<pii>
-#define vl vector<double>
-#define pll pair<double,double>
+#define vl vector<ll>
+#define pll pair<ll,ll>
 #define pb push_back
 #define mp make_pair
 #define fastio ios::sync_with_stdio(false); cin.tie(0);
@@ -15,46 +15,65 @@
 #define TC int T; sf("%d",&T); while(T--)
 using namespace std;
 const int MAXN = 1e6+5;
-const double MOD = 1e9+7;
+const ll MOD = 1e9+7;
 const int INF = (1<<23);
-const double LINF = (1ULL<<56);
+const ll LINF = (1ULL<<56);
 
-double dp[2005][2005];
 pii a[2005];
+int root[2005];
+int ranks[2005];
+
+int findroot(int a){
+    if(root[a]==a) return a;
+    else return root[a] = findroot(root[a]);
+}
+
+bool union_(int a,int b){
+    int r1 = findroot(a);
+    int r2 = findroot(b);
+    if(r1 == r2) return false;
+    if(ranks[r1]>ranks[r2]){
+        root[r2] = r1;
+        ranks[r1]+=ranks[r2];
+    }else{
+        root[r1] = r2;
+        ranks[r2]+=ranks[r1];
+    }
+    return true;
+}
 
 inline double dist(int i,int j){
-    double res = (double)sqrt((a[i].first-a[j].first)*(a[i].first-a[j].first)+(a[i].second-a[j].second)*(a[i].second-a[j].second));
+    double res = sqrt((a[i].first-a[j].first)*(a[i].first-a[j].first)+(a[i].second-a[j].second)*(a[i].second-a[j].second));
     return res;
 }
+/*
+inline ll dist(int i,int j){
+    ll res = abs((a[i].first-a[j].first))+abs((a[i].second-a[j].second));//+(a[i].second-a[j].second)*(a[i].second-a[j].second));
+    return res;
+}*/
 
-double DP(int i,int j){
-    if(dp[i][j]!=-1) return dp[i][j];
-    if(i>j) return 0;
-    if(i==j) return dp[i][j] = 0;
-    else if(i == j-1) return dp[i][j] = dist(i,j);
-    double res = 0;
-    res = min(DP(i+1,j),DP(i,j-1));
-    return dp[i][j] = res;
-}
 
 int main(){
     freopen("moocast.in","r",stdin);
     freopen("moocast.out","w",stdout);
     int n; sf("%d",&n);
     for(int i = 0; i < n; i++) sf("%d%d",&a[i].first,&a[i].second);
+    vector<pair<double,pair<int,int>>> edges;
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            dp[i][j] = -1;
+        for(int j = i+1; j < n; j++){
+            edges.pb(mp(dist(i,j),mp(i,j)));
         }
     }
-    DP(0,n-1);
-    double ans = 0.0;
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            ans = max(ans,dp[i][j]);
-        }
+        root[i] = i;
+        ranks[i] = 1;
     }
-    ll finalans = floor(ans*ans);
-    pf("%lld",finalans);
+    sort(edges.begin(),edges.end());
+    //for(auto i:edges) cout << i.first << "\t" <<i.second.first<<" "<<i.second.second<<endl;
+    double ans = 0;
+    for(auto i:edges){
+        if(union_(i.second.first,i.second.second)) ans = max(i.first,ans);
+    }
+    pf("%lld",(ll)floor(ans*ans));
     return 0;
 }
