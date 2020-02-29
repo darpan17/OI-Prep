@@ -57,6 +57,7 @@ template<class P,class Q>
 ostream& operator << (ostream& out, pair<P,Q> p) {
     out << "(" << p.first << ", " << p.second << ")";
 }
+
 template<class T>
 ostream& operator << (ostream& out, vector<T> x) { 
     out << "{"; bool f = true; 
