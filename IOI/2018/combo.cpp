@@ -1,3 +1,6 @@
+// https://oj.uz/problem/view/IOI18_combo
+// https://oj.uz/submission/205956
+
 #include <bits/stdc++.h>
 #include "combo.h"
 using namespace std;
