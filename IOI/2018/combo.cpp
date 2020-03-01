@@ -49,6 +49,6 @@ string guess_sequence(int n) {
 }
 /*
 int main() {
-    cout << guess_sequence(3) << endl;
+    cout << guess_sequence(5) << endl;
 }
 */
