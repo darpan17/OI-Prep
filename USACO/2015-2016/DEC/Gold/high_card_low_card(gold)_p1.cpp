@@ -42,6 +42,6 @@ int main() {
 //    cout << "elow "; for(auto i:e_low) cout << i << " ";cout << endl;
 //    cout << "blow "; for(auto i:b_low) cout << i << " ";cout << endl;
 //    cout << "ehi "; for(auto i:e_high) cout << i << " ";cout << endl;
-//    cout << "bhi "; for(auto i:b_high) cout << i << " ";cout << endl;
+//    cout << "bhi "; for(auto i:b_high) cout << i << " ";cout << endl; 
     cout << ans;
 }
