@@ -1,31 +1,36 @@
 #include <bits/stdc++.h>
+
+#define ll long long int
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define F first
+#define S second
+#define all(x) (x).begin(),(x).end()
+#define SZ(x) ((int)(x).size())
+#define MS(x,a) memset(x,a,sizeof(x))
+#define F0R(i,n) for(auto (i) = 0; (i) < (n); (i)++)
+#define FOR(i,a,b) for(auto (i) = (a); (i) <= (b); (i)++)
+#define ROF(i,a,b) for(auto (i) = (a); (i) >= (b); (i)--)
+
 using namespace std;
 
-void solve() {
-    int n; cin >> n;
-    double a[n+1];
-    for(int i = 1; i <= n; i++) cin >> a[i];
-    double dp[n+5][n+5];
-    memset(dp,0,sizeof(dp));
-    dp[0][0] = 1;
-    for(int i = 1; i <= n; i++) {
-        for(int j = 0; j <= i; j++) {
-            if(j == 0) dp[i][j] = dp[i-1][j]*(1-a[i]);
-            else dp[i][j] = dp[i-1][j-1]*a[i]+dp[i-1][j]*(1-a[i]);
-        }
-    }
-    double ans = 0;
-    for(int i = 1; i <= n; i++) {
-        if(i > n-i)ans += dp[n][i];
-    }
-    cout << fixed << setprecision(15) << ans;
-}
+ld dp[3005][3005];
 
-int32_t main() {
-    #ifdef LOCAL
-    freopen("inp.txt","r",stdin);
-    #endif
-    ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    solve();
-    return 0;
-}
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	int n; cin >> n;
+	ld a[n+5]; FOR(i,1,n) cin >> a[i];
+	// dp[i][j] = probability to have j heads in first i tosses
+	dp[0][0] = 1.0;
+	FOR(i,1,n) {
+		FOR(j,0,n) {
+			if(j > 0) dp[i][j] = dp[i-1][j-1]*a[i];
+			dp[i][j] += dp[i-1][j]*(1-a[i]);
+		}
+	}	
+	ld ans = 0;
+	FOR(i,n/2+1,n) ans += dp[n][i];
+	cout << fixed << setprecision(10) << ans;
+}	
