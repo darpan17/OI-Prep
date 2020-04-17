@@ -34,3 +34,4 @@ int main() {
 	FOR(i,n/2+1,n) ans += dp[n][i];
 	cout << fixed << setprecision(10) << ans;
 }	
+ 
