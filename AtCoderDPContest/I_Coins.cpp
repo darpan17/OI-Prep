@@ -22,7 +22,7 @@ int main() {
 	cin.tie(0); cout.tie(0);
 	int n; cin >> n;
 	ld a[n+5]; FOR(i,1,n) cin >> a[i];
-	// dp[i][j] = probability to have j heads in first i tosses
+	// dp[i][j] = probability to have j heads in first i tosses 
 	dp[0][0] = 1.0;
 	FOR(i,1,n) {
 		FOR(j,0,n) {
