@@ -17,7 +17,7 @@
 
 using namespace std;
 
-const int MX = 1e+5;
+const int MX = 1e6+5;
 const ll MOD = 1e9+7;
 int n,k; 
 int col[MX];
