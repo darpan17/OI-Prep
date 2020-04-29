@@ -22,7 +22,7 @@ int h(string& x) {
 } 
 
 int main() {
-	ios_base::sync_with_stdio(false);
+	ios_base::sync_with_stdio(false); 
 	cin.tie(0); cout.tie(0);
 	ifstream fin("citystate.in");
 	ofstream fout("citystate.out");
