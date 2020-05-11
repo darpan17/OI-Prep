@@ -24,7 +24,7 @@ without comparsion by rank, test case 8 TLEs, with comparison, passes in 160ms.
 
 using namespace std;
 
-const int MX = 2e6+5;
+const int MX = 2e6+5; 
 int head[MX],ranks[MX];
 int ans[MX];
 
