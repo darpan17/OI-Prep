@@ -12,7 +12,7 @@ string guess_sequence(int n) {
     string ans = "";
     int oup;
     oup = press("AB");
-    if(oup) {
+    if(oup) { 
         oup = press("A");
         if(oup) ans += 'A';
         else ans += 'B';
