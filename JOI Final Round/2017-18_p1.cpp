@@ -9,7 +9,7 @@
     #define all(x) (x).begin(), (x).end()
     #define MS(x,a) memset((x), (a), sizeof(x))
     #define F0R(i,n) for(auto (i) = 0; (i) < (n); (i)++)
-    #define FOR(i,a,b) for(auto (i) = (a); (i) <= (b); (i)++)
+    #define FOR(i,a,b) for(auto (i) = (a); (i) <= (b); (i)++) 
     #define ROF(i,a,b) for(auto (i) = (a); (i) >= (b); (i)--)
      
     using namespace std;
