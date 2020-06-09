@@ -1,1 +1,2 @@
 O(k^2 * log N) works where k ~ 2000 and N ~ 1e9
+In tree dp problems, standing on some particular node, we can join two best outgoing paths from a node to get max distance/value between any two paths. 
