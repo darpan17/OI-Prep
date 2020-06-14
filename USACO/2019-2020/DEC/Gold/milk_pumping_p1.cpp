@@ -1,65 +1,66 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <set>
+#include <map>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <unordered_map>
+
+#define ll long long int
+#define F0R(i,n) for(auto i = 0; i < (n); i++)
+#define FOR(i,a,b) for(auto i = (a); i <= (b); i++)
+#define ROF(i,a,b) for(auto i = (a); i >= (b); i--)
+#define pii pair<int,int> 
+#define pll pair<ll,ll>
+#define vv vector
+#define F first
+#define S second
+#define pb push_back
+#define vi vector<int>
 #define int long long 
 
-int n,m;
-const int MAXN = 1e3+5;
-vector<pair<int,pair<int,int>>> adj[MAXN]; // {cost, flow}
-int dist[MAXN];
-int ff[MAXN];
-int minflow = 1e18;
+using namespace std;
 
-struct comp {
-    bool operator () (const pair<int,pair<int,int>>& p1, const pair<int,pair<int,int>>& p2) {
-        if(p1.second.first < p2.second.first) return true;
-        if(p1.second.first == p2.second.first && p1.second.second > p2.second.second) return true;
-        return false;
-    }
-};
+const int MAXN = 1005;
+vector<pair<int,pii>> adj[MAXN];
+pii dp[MAXN];
 
-void solve() {
-    cin >> n >> m;
-    int u,v,x,y;
-    for(int i = 0; i < m; i++) {
-        cin >> u >> v >> x >> y;
-        u--; v--;
-        adj[u].push_back({v,{x,y}});
-        adj[v].push_back({u,{x,y}});
-    }
-    for(int i = 0; i < n; i++) dist[i] = 1e18;
-    priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, comp> pq;
-    pq.push({0,{0,0}});
-    dist[0] = 0;
-    while(!pq.empty()) {
-        int node = pq.top().first;
-        pq.pop();
-        for(auto& i:adj[node]) {
-            if(i.second.first+dist[node] < dist[i.first]) {
-                dist[i.first] = i.second.first+dist[node];
-                ff[i.first] = i.second.second;
-                pq.push({i.first,{dist[node],ff[node]}});
-                minflow = min(minflow,ff[i.first]);
-            } else if(i.second.first+dist[node] == dist[i.first] && i.second.second > ff[i.first]) {
-                ff[i.first] = i.second.second; 
-                pq.push({i.first,{dist[node],ff[node]}});
-                minflow = min(minflow,ff[i.first]);
-            }
-        }
-    } 
-    double ans = (double)minflow/dist[n-1];
-    ans = ans*1e6;
-    cout << (int)ans << "\n";
-}
-
-int32_t main() {
-    #ifdef LOCAL
-    freopen("inp.txt","r",stdin);
-    #else
-    freopen("pump.in","r",stdin);
-    freopen("pump.out","w",stdout);
-    #endif
-    ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    int t = 1; // cin >> t;
-    while(t--) solve();
-    return 0;
+signed main() {
+	ifstream fin("pump.in");
+	ofstream fout("pump.out");
+	#define cin fin
+	#define cout fout
+	int n,m; cin >> n >> m;
+	F0R(i,m) {
+		int u,v,cost,flow; cin >> u >> v >> cost >> flow;
+		--u; --v;
+		adj[u].pb(make_pair(v,make_pair(flow,cost)));
+		adj[v].pb(make_pair(u,make_pair(flow,cost)));
+	}
+	F0R(i,n) dp[i] = make_pair(-10000000,10000000);
+	dp[0] = {1000000,0};
+	queue<pair<int,pii>> q;
+	q.push(make_pair(0,dp[0]));
+	while(!q.empty()) {
+		int node = q.front().F;
+		q.pop();
+		for(auto u:adj[node]) {
+			if(u.F == 0) continue;
+			pii newPath = make_pair(min(dp[node].F, u.S.F), dp[node].S + u.S.S);
+			if(((newPath.F * 1000000)/newPath.S) > ((dp[u.F].F * 1000000)/dp[u.F].S)) {
+				dp[u.F] = newPath;
+				q.push(make_pair(u.F,newPath));
+			} 
+		}
+	}
+	cout << ((dp[n-1].F * 1000000)/ dp[n-1].S);
+	cout << endl;
 }
