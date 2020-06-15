@@ -31,7 +31,7 @@ using namespace std;
 const int MAXM = 1e6+5;
 const int MAXN = 1e5+5;
 int n,d,m;
-pii a[MAXM];
+pii a[MAXM]; 
 vi ans[MAXN];
 
 bool valid(int machines) {
