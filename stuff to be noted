@@ -1,3 +1,4 @@
 O(k^2 * log N) works where k ~ 2000 and N ~ 1e9
 In tree dp problems, standing on some particular node, we can join two best outgoing paths from a node to get max distance/value between any two paths. 
 See whether you can apply binsearch... EVERYWHERE
+For some problems, computing the complement of the answer and then subtracting it from the total is much easier than computing the answer itself.
