@@ -2,3 +2,4 @@ O(k^2 * log N) works where k ~ 2000 and N ~ 1e9
 In tree dp problems, standing on some particular node, we can join two best outgoing paths from a node to get max distance/value between any two paths. 
 See whether you can apply binsearch... EVERYWHERE
 For some problems, computing the complement of the answer and then subtracting it from the total is much easier than computing the answer itself.
+Each integer can be uniquely represented as sum of powers of 2. Quite a common fact, but it has a VARIETY of uses. (reference: see this prob for example -> https://codeforces.com/contest/1392/problem/E)
