@@ -1,2 +1,3 @@
 https://oj.uz/problem/view/APIO15_sculpture (nice use of greedy bit manipulation)
 http://www.usaco.org/index.php?page=viewproblem2&cpid=861 (nice use of creating a separate graph and running dijkstra on it in order to force all paths to pass through a certain node)
+http://usaco.org/index.php?page=viewproblem2&cpid=970 (Kind of classical tree problem. checks whether any node in the simple path between u to v has a colour c.)
