@@ -3,3 +3,4 @@ In tree dp problems, standing on some particular node, we can join two best outg
 See whether you can apply binsearch... EVERYWHERE
 For some problems, computing the complement of the answer and then subtracting it from the total is much easier than computing the answer itself.
 Each integer can be uniquely represented as sum of powers of 2. Quite a common fact, but it has a VARIETY of uses. (reference: see this prob for example -> https://codeforces.com/contest/1392/problem/E)
+In path dp, while recursing use states as f(n, m, last), and then iterate over the last state(s). This is helpful in lot of INOI problems, eg: ZCO20P2, INOI14P1. See soln of CF contest/118/D/ to understand it.
