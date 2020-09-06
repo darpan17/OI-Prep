@@ -1,42 +1,48 @@
 #include <bits/stdc++.h>
-
-#define ll long long int
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define F first
-#define S second
-#define all(x) (x).begin(),(x).end()
-#define SZ(x) ((int)(x).size())
-#define MS(x) memset(x,a,sizeof(x))
-#define F0R(i,n) for(auto (i) = 0; (i) < (n); (i)++)
-#define FOR(i,a,b) for(auto (i) = (a); (i) <= (b); (i)++)
-#define ROF(i,a,b) for(auto (i) = (a); (i) >= (b); (i)--)
-
 using namespace std;
-
-const int MX = 5e4+5;
-int n;
-ll dpleft[MX],dpright[MX];
-ll pos[MX];
-ld ans = 1e18;
+#define ll long long 
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(0); cout.tie(0);
-	//~ ifstream fin("angry.in");
-	//~ ofstream fout("angry.out");
-	//~ #define cin fin
-	//~ #define cout fout
-	cin >> n;
-	FOR(i,1,n) cin >> pos[i];
-	sort(pos+1,pos+1+n);
-	dpleft[1] = 0;
-	FOR(i,2,n) dpleft[i] = max(dpleft[i-1]+1,pos[i]-pos[i-1]);
-	dpright[n] = 0;
-	ROF(i,n-1,1) dpright[i] = max(dpright[i+1]+1,pos[i+1]-pos[i]);
-	FOR(i,2,n) ans = min(ans,(ld)max((ld)((pos[i]-pos[i-1])/2.0),(ld)max(dpleft[i-1],dpright[i])+1.0));
-	cout.precision(1);
-	cout << fixed;
-	cout << ans;
-}	
+	freopen("angry.in", "r", stdin);
+	freopen("angry.out", "w", stdout);
+	int n; scanf("%d",&n);
+	double a[n]; 
+	for(int i=0;i<n;i++) {
+		ll x; scanf("%lld",&x);
+		a[i] = x;
+	}
+	sort(a, a+n);
+	
+	// double left[n], right[n];
+	double maxLeft[n], maxRight[n];
+	
+	// left[0] = 0;
+	// for(int i=1;i<n;i++) {
+		// left[i] = max(left[i-1]+1, 
+	// }
+	
+	maxLeft[0] = 0;
+	for(int i=1;i<n;i++) {
+		maxLeft[i] = max(maxLeft[i-1]+1, a[i]-a[i-1]);
+	}
+	maxRight[n-1] = 0;
+	for(int i=n-2;i>=0;i--) {
+		maxRight[i] = max(maxRight[i+1]+1, a[i+1]-a[i]);
+	}
+	
+	double ans = 1e18;
+	for(int i=1;i<n;i++) {
+		double dist = (a[i]-a[i-1])/2.0;
+		// if(maxRight[i]+2+maxLeft[i-1] >= dist) {
+			// ans = min(ans, max((maxLeft[i-1]+1, maxRight[i]+1)));
+		// } else {
+			// ans = min(ans, dist);
+		// }
+		ans = min(ans, max({maxLeft[i-1]+1, maxRight[i]+1, dist}));
+		// cout << "maxLeft[i-1] = " << maxLeft[i-1] << " maxRight[i] = " << maxRight[i] << " dist = " << dist << endl;
+		// cout << "i = " << i << " ans = " << ans << endl;
+	}
+	for(int i=0;i<n;i++) ans = min(ans, max(maxLeft[i], maxRight[i]));
+	
+	printf("%0.1f", ans);
+}
