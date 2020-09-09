@@ -74,7 +74,7 @@ int main() {
 		ans = min(ans, max(dfs1(a,-1), dfs1(b,-1)));
 	}
 	--testIdx;
-	if(testIdx >= 0 && testIdx < path.size()) {
+	if(testIdx >= 0 && testIdx < path.size()) { 
 		curEdge = path[testIdx];
 		ans = min(ans, max(dfs1(a,-1), dfs1(b,-1)));
 	}
